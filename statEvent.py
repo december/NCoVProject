@@ -100,6 +100,7 @@ for i in range(4):
 		plt.plot(x, ylist[k])
 		plt.title(category[i]+'_'+start+'_'+event)
 		plt.savefig('figs/'+category[i]+'_'+name[j]+'_'+dt+'_'+event+'.png')
+		plt.clf()
 
 fw = open('data/province_'+dt+'_'+event+'.text', 'w')
 datelist = sorted(provincedic.keys())
