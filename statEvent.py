@@ -76,6 +76,7 @@ for line in data:
 
 for i in range(4):
 	datelist = infodic[i].keys().sort()
+	print datelist
 	start = min(datelist)
 	n = len(datelist)
 	x = list()
