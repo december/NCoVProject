@@ -93,7 +93,7 @@ for i in range(4):
 			ylist[k].append(unit[k])
 		x.append(calcDateDelta(start, datelist[j]))
 	x = np.array(x)
-	ylist = np.array(y)
+	ylist = np.array(ylist)
 	for j in range(5):
 		plt.xlabel('Date')
 		plt.ylabel(name[j])
