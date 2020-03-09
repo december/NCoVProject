@@ -19,7 +19,7 @@ def calcDateDelta(date1, date2):
 
 name = ['Numbers', 'Views', 'Likes', 'Comments', 'Shares']
 category = ['All', 'Celebrity', 'Company', 'Government']
-infodic = {} #from different kinds of users to date to the number of videos, views, likes, comments, shares
+infodic = list() #from different kinds of users to date to the number of videos, views, likes, comments, shares
 
 for i in range(4): #all, celebrity, company, government
 	infodic.append({})
