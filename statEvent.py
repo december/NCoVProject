@@ -75,7 +75,7 @@ for line in data:
 		for i in range(4):
 			infodic[3][date][i+1] += int(temp[7+i])
 
-print infodic
+print infodic[0]
 for i in range(4):
 	datelist = infodic[i].keys().sort()
 	#print datelist
