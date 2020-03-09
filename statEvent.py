@@ -20,6 +20,7 @@ def calcDateDelta(date1, date2):
 name = ['Numbers', 'Views', 'Likes', 'Comments', 'Shares']
 category = ['All', 'Celebrity', 'Company', 'Government']
 infodic = list() #from different kinds of users to date to the number of videos, views, likes, comments, shares
+earliest = '20191230'
 
 for i in range(4): #all, celebrity, company, government
 	infodic.append({})
@@ -75,17 +76,18 @@ for line in data:
 		for i in range(4):
 			infodic[3][date][i+1] += int(temp[7+i])
 
-print infodic[0].keys().sort()
 for i in range(4):
-	datelist = infodic[i].keys().sort()
+	datelist = sorted(infodic[i].keys())
 	#print datelist
-	start = min(datelist)
+	start = max(min(datelist), earliest)
 	n = len(datelist)
 	x = list()
 	ylist = list()
 	for j in range(5):
 		ylist.append(list())
 	for j in range(n):
+		if datelist[j] < start:
+			continue
 		unit = infodic[i][datelist[j]]
 		for k in range(5):
 			ylist[k].append(unit[k])
@@ -103,7 +105,9 @@ fw = open('data/province_'+dt+'_'+event+'.text', 'w')
 datelist = provincedic.keys().sort()
 n = len(datelist)
 for i in range(n):
-	plist = provincedic[datelist[i]].keys().sort()
+	if datelist[i] < earliest:
+		continue
+	plist = sorted(provincedic[datelist[i]].keys())
 	m = len(plist)
 	s = datelist[i]+'\t'
 	for j in range(m):
