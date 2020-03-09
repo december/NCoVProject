@@ -97,9 +97,10 @@ for i in range(4):
 	for j in range(5):
 		plt.xlabel('Date')
 		plt.ylabel(name[j])
+		plt.yscale('log')
 		plt.plot(x, ylist[j])
 		plt.title(category[i]+'_'+start+'_'+event)
-		plt.savefig('figs/'+category[i]+'_'+name[j]+'_'+dt+'_'+event+'.png')
+		plt.savefig('figs/'+category[i]+'_'+name[j]+'_'+dt+'_'+event+'_log.png')
 		plt.clf()
 
 fw = open('data/province_'+dt+'_'+event+'.text', 'w')
