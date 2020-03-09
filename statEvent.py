@@ -34,7 +34,8 @@ data = fr.readlines()
 fr.close()
 for line in data:
 	temp = line[:-1].split('\t')
-	print temp
+	if len(temp) < 11:
+		continue
 	date = temp[2]
 	provc = temp[3]
 	if not provincedic.has_key(date):
