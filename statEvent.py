@@ -34,6 +34,7 @@ data = fr.readlines()
 fr.close()
 for line in data:
 	temp = line[:-1].split('\t')
+	print len(temp)
 	if len(temp) < 15:
 		continue
 	#print temp
@@ -76,7 +77,7 @@ for line in data:
 
 for i in range(4):
 	datelist = infodic[i].keys().sort()
-	print datelist
+	#print datelist
 	start = min(datelist)
 	n = len(datelist)
 	x = list()
