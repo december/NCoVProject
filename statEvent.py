@@ -97,7 +97,7 @@ for i in range(4):
 	for j in range(5):
 		plt.xlabel('Date')
 		plt.ylabel(name[j])
-		plt.plot(x, ylist[k])
+		plt.plot(x, ylist[j])
 		plt.title(category[i]+'_'+start+'_'+event)
 		plt.savefig('figs/'+category[i]+'_'+name[j]+'_'+dt+'_'+event+'.png')
 		plt.clf()
