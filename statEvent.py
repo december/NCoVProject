@@ -102,7 +102,7 @@ for i in range(4):
 		plt.savefig('figs/'+category[i]+'_'+name[j]+'_'+dt+'_'+event+'.png')
 
 fw = open('data/province_'+dt+'_'+event+'.text', 'w')
-datelist = provincedic.keys().sort()
+datelist = sorted(provincedic.keys())
 n = len(datelist)
 for i in range(n):
 	if datelist[i] < earliest:
