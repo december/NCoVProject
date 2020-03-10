@@ -151,10 +151,10 @@ for i in range(n):
 		continue
 	plist = sorted(provincedic[datelist[i]].keys())
 	m = len(plist)
-	s = datelist[i]+'\t'
+	#s = datelist[i]+'\t'
 	for j in range(m):
 		unit = provincedic[datelist[i]][plist[j]]
-		s += plist[j]
+		s = datelist[i]+'\t'+plist[j]
 		for k in range(5):
 			s += '\t' + str(unit[k])
 		fw.write(s+'\n')
