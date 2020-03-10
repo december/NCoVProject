@@ -128,19 +128,19 @@ for i in range(4):
 		for j in range(5):
 			plt.xlabel('Date')
 			plt.ylabel('Rate on ' + name[j])
-			#plt.yscale('log')
+			plt.yscale('log')
 			plt.plot(x, rate2[j])
 			plt.title('Company / Government:'+start+'_'+event)		
-			plt.savefig('figs/Company_Government_'+name[j]+'_'+dt+'_'+event+'.png')
+			plt.savefig('figs/Company_Government_'+name[j]+'_'+dt+'_'+event+'_log.png')
 			plt.clf()
 	if i == 3 or i == 2:
 		for j in range(5):
 			plt.xlabel('Date')
 			plt.ylabel('Rate on ' + name[j])
-			#plt.yscale('log')
+			plt.yscale('log')
 			plt.plot(x, rate1[j])
 			plt.title('Celebrity / '+category[i]+':'+start+'_'+event)		
-			plt.savefig('figs/Celebrity_'+category[i]+'_'+name[j]+'_'+dt+'_'+event+'.png')
+			plt.savefig('figs/Celebrity_'+category[i]+'_'+name[j]+'_'+dt+'_'+event+'_log.png')
 			plt.clf()
 
 fw = open('data/province_'+dt+'_'+event+'.text', 'w')
