@@ -105,13 +105,13 @@ for i in range(4):
 			if infodic[2].has_key(datelist[j]):
 				topunit = infodic[2][datelist[j]]
 			for k in range(5):
-				rate2[k].append(topunit[k] * 1.0 / unit[k])
+				rate2[k].append((topunit[k] + 1) * 1.0 / (unit[k] + 1))
 		if i == 3 or i == 2:
 			topunit = [0, 0, 0, 0, 0]
 			if infodic[1].has_key(datelist[j]):
 				topunit = infodic[1][datelist[j]]
 			for k in range(5):
-				rate1[k].append(topunit[k] * 1.0 / unit[k])
+				rate1[k].append((topunit[k] + 1) * 1.0 / (unit[k] + 1))
 	x = np.array(x)
 	ylist = np.array(ylist)
 	for j in range(5):
