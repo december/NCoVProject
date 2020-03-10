@@ -83,8 +83,16 @@ for i in range(4):
 	n = len(datelist)
 	x = list()
 	ylist = list()
+	rate1 = list()
+	rate2 = list()
 	for j in range(5):
 		ylist.append(list())
+	if i == 3:
+		for j in range(5):
+			rate2.append(list())
+	if i == 3 or i == 2:
+		for j in range(5):
+			rate1.append(list())
 	for j in range(n):
 		if datelist[j] < start:
 			continue
@@ -92,6 +100,18 @@ for i in range(4):
 		for k in range(5):
 			ylist[k].append(unit[k])
 		x.append(calcDateDelta(start, datelist[j]))
+		if i == 3:
+			topunit = [0, 0, 0, 0, 0]
+			if infodic[2].has_key(datelist[j]):
+				topunit = infodic[2][datelist[j]]
+			for k in range(5):
+				rate2[k].append(topunit[k] * 1.0 / unit[k])
+		if i == 3 or i == 2:
+			topunit = [0, 0, 0, 0, 0]
+			if infodic[1].has_key(datelist[j]):
+				topunit = infodic[1][datelist[j]]
+			for k in range(5):
+				rate1[k].append(topunit[k] * 1.0 / unit[k])
 	x = np.array(x)
 	ylist = np.array(ylist)
 	for j in range(5):
@@ -102,6 +122,26 @@ for i in range(4):
 		plt.title(category[i]+'_'+start+'_'+event)
 		plt.savefig('figs/'+category[i]+'_'+name[j]+'_'+dt+'_'+event+'_log.png')
 		plt.clf()
+	rate1 = np.array(rate1)
+	rate2 = np.array(rate2)
+	if i == 3:
+		for j in range(5):
+			plt.xlabel('Date')
+			plt.ylabel('Rate on ' + name[j])
+			#plt.yscale('log')
+			plt.plot(x, rate2[j])
+			plt.title('Company / Government:'+start+'_'+event)		
+			plt.savefig('figs/Company_Government_'+name[j]+'_'+dt+'_'+event+'.png')
+			plt.clf()
+	if i == 3 or i == 2:
+		for j in range(5):
+			plt.xlabel('Date')
+			plt.ylabel('Rate on ' + name[j])
+			#plt.yscale('log')
+			plt.plot(x, rate1[j])
+			plt.title('Celebrity / '+category[i]+':'+start+'_'+event)		
+			plt.savefig('figs/Celebrity_'+category[i]+'_'+name[j]+'_'+dt+'_'+event+'.png')
+			plt.clf()
 
 fw = open('data/province_'+dt+'_'+event+'.text', 'w')
 datelist = sorted(provincedic.keys())
