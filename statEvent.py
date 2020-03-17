@@ -53,7 +53,8 @@ for line in data:
 		infodic[0][date] = [0, 0, 0, 0, 0]
 	infodic[0][date][0] += 1
 	for i in range(4):
-		infodic[0][date][i+1] += int(temp[7+i])
+		if temp[7+i] != 'null':		
+			infodic[0][date][i+1] += int(temp[7+i])
 	if temp[5] == 'null':
 		continue
 	ct = int(temp[5])
