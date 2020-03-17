@@ -64,13 +64,15 @@ for line in data:
 	if not temp[5].isdigit():
 		continue
 	ct = int(temp[5])
-	cc = int(temp[6])
 	if ct == 0:
 		if not infodic[1].has_key(date):
 			infodic[1][date] = [0, 0, 0, 0, 0]
 		infodic[1][date][0] += 1
 		for i in range(4):
 			infodic[1][date][i+1] += int(temp[7+i])
+	if not temp[6].isdigit():
+		continue			
+	cc = int(temp[6])
 	if ct == 1 and cc == 0:
 		if not infodic[2].has_key(date):
 			infodic[2][date] = [0, 0, 0, 0, 0]
