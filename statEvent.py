@@ -46,16 +46,21 @@ for line in data:
 	if not provincedic[date].has_key(provc):
 		provincedic[date][provc] = [0, 0, 0, 0, 0]
 	provincedic[date][provc][0] += 1
+	wrongline = False
 	for i in range(4):
 		if temp[7+i] != 'null':
 			provincedic[date][provc][i+1] += int(temp[7+i])
+		else:
+			wrongline = True
 	if not infodic[0].has_key(date):
 		infodic[0][date] = [0, 0, 0, 0, 0]
 	infodic[0][date][0] += 1
 	for i in range(4):
 		if temp[7+i] != 'null':		
 			infodic[0][date][i+1] += int(temp[7+i])
-	if temp[5] == 'null':
+		else:
+			wrongline = True
+	if temp[5] == 'null' or wrongline:
 		continue
 	ct = int(temp[5])
 	cc = int(temp[6])
