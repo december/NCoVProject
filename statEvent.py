@@ -47,7 +47,8 @@ for line in data:
 		provincedic[date][provc] = [0, 0, 0, 0, 0]
 	provincedic[date][provc][0] += 1
 	for i in range(4):
-		provincedic[date][provc][i+1] += int(temp[7+i])
+		if temp[7+i] != 'null':
+			provincedic[date][provc][i+1] += int(temp[7+i])
 	if not infodic[0].has_key(date):
 		infodic[0][date] = [0, 0, 0, 0, 0]
 	infodic[0][date][0] += 1
