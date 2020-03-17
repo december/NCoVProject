@@ -20,7 +20,7 @@ def calcDateDelta(date1, date2):
 name = ['Numbers', 'Views', 'Likes', 'Comments', 'Shares']
 category = ['All', 'Celebrity', 'Company', 'Government']
 infodic = list() #from different kinds of users to date to the number of videos, views, likes, comments, shares
-earliest = '20191230'
+earliest = '20200101'
 
 for i in range(4): #all, celebrity, company, government
 	infodic.append({})
@@ -28,8 +28,8 @@ for i in range(4): #all, celebrity, company, government
 provincedic = {} #from date to province to the number of videos, views, likes, comments, shares
 
 path = '../../../data/'
-event = 'lwl'
-dt = '20200306'
+event = 'ck'
+dt = '20200315'
 fr = open(path+'aweme_event_'+event+'_'+dt+'.text', 'r')
 data = fr.readlines()
 fr.close()
