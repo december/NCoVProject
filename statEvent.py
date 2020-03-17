@@ -76,8 +76,10 @@ for line in data:
 		for i in range(4):
 			infodic[3][date][i+1] += int(temp[7+i])
 
-print infodic
+#print infodic[0]
 for i in range(4):
+	print i
+	print infodic[i]
 	datelist = sorted(infodic[i].keys())
 	#print datelist
 	start = max(min(datelist), earliest)
