@@ -60,7 +60,8 @@ for line in data:
 			infodic[0][date][i+1] += int(temp[7+i])
 		else:
 			wrongline = True
-	if temp[5] == 'null' or wrongline:
+	#if temp[5] == 'null' or wrongline:
+	if not temp[5].isdigit():
 		continue
 	ct = int(temp[5])
 	cc = int(temp[6])
