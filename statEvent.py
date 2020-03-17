@@ -179,6 +179,8 @@ for j in range(5):
 for j in range(n):
 	if datelist[j] < start:
 		continue
+	if len(datelist[j]) != 8:
+		continue
 	unit = infodic[0][datelist[j]]
 	for k in range(5):
 		ylist[k].append(unit[k])
@@ -211,6 +213,8 @@ for j in range(5):
 		for k in range(n):
 			if datelist[k] < start:
 				continue
+			if len(datelist[k]) != 8:
+				continue		
 			x.append(calcDateDelta(start, datelist[k]))
 			y.append(infodic[i][datelist[k]][j])
 		x = np.array(x)
