@@ -48,7 +48,7 @@ for line in data:
 	provincedic[date][provc][0] += 1
 	wrongline = False
 	for i in range(4):
-		if temp[7+i] != 'null':
+		if temp[7+i].isdigit():
 			provincedic[date][provc][i+1] += int(temp[7+i])
 		else:
 			wrongline = True
@@ -56,7 +56,7 @@ for line in data:
 		infodic[0][date] = [0, 0, 0, 0, 0]
 	infodic[0][date][0] += 1
 	for i in range(4):
-		if temp[7+i] != 'null':		
+		if temp[7+i].isdigit():		
 			infodic[0][date][i+1] += int(temp[7+i])
 		else:
 			wrongline = True
