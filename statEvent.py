@@ -28,7 +28,7 @@ for i in range(6): #all, celebrity, company, government
 provincedic = {} #from date to province to the number of videos, views, likes, comments, shares
 
 path = '../../../data/'
-event = 'ck'
+event = 'cyhb'
 dt = '20200315'
 fr = open(path+'aweme_event_'+event+'_'+dt+'.text', 'r')
 data = fr.readlines()
@@ -181,7 +181,7 @@ for j in range(5):
 	plt.grid()
 	plt.plot(x, ylist[j])
 	plt.title('All_'+start+'_'+event)
-	plt.savefig('figs/All_'+name[j]+'_'+dt+'_'+event+'.png')
+	#plt.savefig('figs/All_'+name[j]+'_'+dt+'_'+event+'.png')
 	plt.yscale('log')
 	plt.savefig('figs/All_'+name[j]+'_'+dt+'_'+event+'_log.png')
 	plt.clf()	
@@ -209,7 +209,7 @@ for j in range(5):
 	plt.title('Certification_'+start+'_'+event)
 	plt.legend()
 	plt.grid()
-	plt.savefig('figs/Sep_'+name[j]+'_'+dt+'_'+event+'.png')
+	#plt.savefig('figs/Sep_'+name[j]+'_'+dt+'_'+event+'.png')
 	plt.yscale('log')
 	plt.savefig('figs/Sep_'+name[j]+'_'+dt+'_'+event+'_log.png')
 	plt.clf()
