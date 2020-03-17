@@ -18,11 +18,11 @@ def calcDateDelta(date1, date2):
 	return (date2 - date1).days 	
 
 name = ['Numbers', 'Views', 'Likes', 'Comments', 'Shares']
-category = ['All', 'Celebrity', 'Company', 'Government']
+category = ['All', 'Celebrity', 'Company', 'Government', 'Media', 'Organization']
 infodic = list() #from different kinds of users to date to the number of videos, views, likes, comments, shares
 earliest = '20200101'
 
-for i in range(4): #all, celebrity, company, government
+for i in range(6): #all, celebrity, company, government
 	infodic.append({})
 
 provincedic = {} #from date to province to the number of videos, views, likes, comments, shares
@@ -69,14 +69,27 @@ for line in data:
 		infodic[2][date][0] += 1
 		for i in range(4):
 			infodic[2][date][i+1] += int(temp[7+i])
-	if ct == 1 and cc > 0 and cc < 4:
+	if ct == 1 and cc == 2:
 		if not infodic[3].has_key(date):
 			infodic[3][date] = [0, 0, 0, 0, 0]
 		infodic[3][date][0] += 1
 		for i in range(4):
 			infodic[3][date][i+1] += int(temp[7+i])
+	if ct == 1 and cc == 1:
+		if not infodic[4].has_key(date):
+			infodic[4][date] = [0, 0, 0, 0, 0]
+		infodic[4][date][0] += 1
+		for i in range(4):
+			infodic[4][date][i+1] += int(temp[7+i])
+	if ct == 1 and cc == 3:
+		if not infodic[5].has_key(date):
+			infodic[5][date] = [0, 0, 0, 0, 0]
+		infodic[5][date][0] += 1
+		for i in range(4):
+			infodic[5][date][i+1] += int(temp[7+i])
 
 #print infodic[0]
+'''
 for i in range(4):
 	print i
 	print infodic[i]
@@ -145,6 +158,59 @@ for i in range(4):
 			plt.title('Celebrity / '+category[i]+':'+start+'_'+event)		
 			plt.savefig('figs/Celebrity_'+category[i]+'_'+name[j]+'_'+dt+'_'+event+'_log.png')
 			plt.clf()
+'''
+datelist = sorted(infodic[0].keys())
+start = max(min(datelist), earliest)
+n = len(datelist)
+x = list()
+ylist = list()
+for j in range(5):
+	ylist.append(list())
+for j in range(n):
+	if datelist[j] < start:
+		continue
+	unit = infodic[0][datelist[j]]
+	for k in range(5):
+		ylist[k].append(unit[k])
+	x.append(calcDateDelta(start, datelist[j]))
+x = np.array(x)
+ylist = np.array(ylist)
+for j in range(5):
+	plt.xlabel('Date')
+	plt.ylabel(name[j])
+	plt.yscale('log')
+	plt.grid()
+	plt.plot(x, ylist[j])
+	plt.title('All_'+start+'_'+event)
+	plt.savefig('figs/All_'+name[j]+'_'+dt+'_'+event+'_log.png')
+	plt.clf()	
+
+color = ['b', 'k', 'r', 'g', 'y']
+for j in range(5):
+	plt.xlabel('Date')
+	plt.ylabel(name[j])
+	plt.yscale('log')
+	for i in range(1, 6):
+		x = list()
+		y = list()		
+		datelist = sorted(infodic[i].keys())
+		n = len(datelist)
+		if n == 0:
+			continue
+		start = max(min(datelist), earliest)
+		for k in range(n):
+			if datelist[k] < start:
+				continue
+			x.append(calcDateDelta(start, datelist[k]))
+			y.append(infodic[i][datelist[k]][j])
+		x = np.array(x)
+		y = np.array(y)
+		plt.plot(x, y, c=color[i-1], label=category[i])
+	plt.title('Certification_'+start+'_'+event)
+	plt.legend()
+	plt.grid()
+	plt.savefig('figs/Sep_'+name[j]+'_'+dt+'_'+event+'_log.png')
+	plt.clf()
 
 fw = open('data/province_'+dt+'_'+event+'.text', 'w')
 datelist = sorted(provincedic.keys())
