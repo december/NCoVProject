@@ -28,7 +28,7 @@ for i in range(6): #all, celebrity, company, government
 provincedic = {} #from date to province to the number of videos, views, likes, comments, shares
 
 path = '../../../data/'
-event = 'yhry'
+event = 'zjx'
 dt = '20200315'
 fr = open(path+'aweme_event_'+event+'_'+dt+'.text', 'r')
 data = fr.readlines()
