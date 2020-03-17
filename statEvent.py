@@ -29,7 +29,7 @@ provincedic = {} #from date to province to the number of videos, views, likes, c
 
 path = '../../../data/'
 event = 'fg'
-dt = '20200315'
+dt = '20200316'
 fr = open(path+'aweme_event_'+event+'_'+dt+'.text', 'r')
 data = fr.readlines()
 fr.close()
