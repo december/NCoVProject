@@ -202,6 +202,7 @@ color = ['b', 'k', 'r', 'g', 'y']
 for j in range(5):
 	plt.xlabel('Date')
 	plt.ylabel(name[j])
+	start = earliest
 	for i in range(1, 6):
 		x = list()
 		y = list()		
@@ -209,7 +210,7 @@ for j in range(5):
 		n = len(datelist)
 		if n == 0:
 			continue
-		start = max(min(datelist), earliest)
+		#start = max(min(datelist), earliest)
 		for k in range(n):
 			if datelist[k] < start:
 				continue
