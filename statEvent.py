@@ -1,3 +1,4 @@
+# -*- coding: UTF-8 -*-
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
@@ -9,6 +10,13 @@ import datetime
 import time
 sns.set()
 sns.set_style('white')
+from matplotlib.font_manager import FontProperties
+import datetime
+import matplotlib.dates as mdate
+import random
+
+def getChineseFont():
+	return FontProperties(fname='/System/Library/Fonts/PingFang.ttc')
 
 def calcDateDelta(date1, date2):
 	date1 = time.strptime(date1, '%Y%m%d')
@@ -19,6 +27,8 @@ def calcDateDelta(date1, date2):
 
 name = ['Numbers', 'Views', 'Likes', 'Comments', 'Shares']
 category = ['All', 'Celebrity', 'Company', 'Government', 'Media', 'Organization']
+cname = [u'数量', u'观看数', u'点赞数', u'评论数', u'转发数']
+ccategory = [u'全部', u'名人', u'商家', u'政府', u'媒体', u'机构']
 infodic = list() #from different kinds of users to date to the number of videos, views, likes, comments, shares
 earliest = '20200101'
 
@@ -28,8 +38,8 @@ for i in range(6): #all, celebrity, company, government
 provincedic = {} #from date to province to the number of videos, views, likes, comments, shares
 
 path = '../../../data/'
-event = 'ck'
-dt = '20200315'
+event = 'shl'
+dt = '20200313'
 fr = open(path+'aweme_event_'+event+'_'+dt+'.text', 'r')
 data = fr.readlines()
 fr.close()
@@ -176,6 +186,7 @@ x = list()
 ylist = list()
 for j in range(5):
 	ylist.append(list())
+'''	
 for j in range(n):
 	if datelist[j] < start:
 		continue
@@ -186,13 +197,27 @@ for j in range(n):
 		ylist[k].append(unit[k])
 	x.append(calcDateDelta(start, datelist[j]))
 x = np.array(x)
+'''
+for j in range(n):
+	if datelist[j] < start:
+		continue
+	if len(datelist[j]) != 8:
+		continue
+	unit = infodic[0][datelist[j]]
+	for k in range(5):
+		ylist[k].append(unit[k])
+	x.append(datelist[j])
+x = [datetime.datetime.strptime(d, '%Y%m%d').date() for d in x]
 ylist = np.array(ylist)
 for j in range(5):
-	plt.xlabel('Date')
-	plt.ylabel(name[j])
+	ax = plt.gca()   #表明设置图片的各个轴，plt.gcf()表示图片本身
+	ax.xaxis.set_major_formatter(mdate.DateFormatter('%m-%d'))  # 横坐标标签显示的日期格式	
+	plt.xlabel(u'日期',fontproperties=getChineseFont(), fontsize=18)
+	plt.ylabel(cname[j],fontproperties=getChineseFont(), fontsize=18)
 	plt.grid()
-	plt.plot(x, ylist[j])
-	plt.title('All_'+start+'_'+event)
+	plt.plot(x, ylist[j], linewidth=2.5)
+	#plt.title('All_'+start+'_'+event,fontproperties=getChineseFont(), fontsize=25)
+	plt.title(u'双黄连事件热度曲线',fontproperties=getChineseFont(), fontsize=25)
 	#plt.savefig('figs/All_'+name[j]+'_'+dt+'_'+event+'.png')
 	plt.yscale('log')
 	plt.savefig('figs/All_'+name[j]+'_'+dt+'_'+event+'_log.png')
@@ -200,10 +225,14 @@ for j in range(5):
 
 color = ['b', 'k', 'r', 'g', 'y']
 for j in range(5):
-	plt.xlabel('Date')
-	plt.ylabel(name[j])
+	plt.xlabel(u'日期',fontproperties=getChineseFont(), fontsize=18)
+	plt.ylabel(cname[j],fontproperties=getChineseFont(), fontsize=18)
+	ax = plt.gca()   #表明设置图片的各个轴，plt.gcf()表示图片本身
+	ax.xaxis.set_major_formatter(mdate.DateFormatter('%m-%d'))  # 横坐标标签显示的日期格式	
 	start = earliest
 	for i in range(1, 6):
+		if i != 2 and i != 3:
+			continue
 		x = list()
 		y = list()		
 		datelist = sorted(infodic[i].keys())
@@ -216,13 +245,16 @@ for j in range(5):
 				continue
 			if len(datelist[k]) != 8:
 				continue		
-			x.append(calcDateDelta(start, datelist[k]))
+			#x.append(calcDateDelta(start, datelist[k]))
+			x.append(datelist[k])
 			y.append(infodic[i][datelist[k]][j])
-		x = np.array(x)
+		#x = np.array(x)
+		x = [datetime.datetime.strptime(d, '%Y%m%d').date() for d in x]
 		y = np.array(y)
-		plt.plot(x, y, c=color[i-1], label=category[i])
-	plt.title('Certification_'+start+'_'+event)
-	plt.legend()
+		plt.plot(x, y, c=color[i-1], label=ccategory[i])
+	#plt.title('Certification_'+start+'_'+event)
+	plt.title('双黄连事件舆论态势',fontproperties=getChineseFont(), fontsize=25)
+	plt.legend(fontsize=18)
 	plt.grid()
 	#plt.savefig('figs/Sep_'+name[j]+'_'+dt+'_'+event+'.png')
 	plt.yscale('log')
